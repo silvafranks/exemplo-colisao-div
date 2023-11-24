@@ -1,0 +1,51 @@
+
+body{
+    display:flex ;
+
+}
+body .container {
+    width: 800px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    position: absolute;
+    background-color: orange;
+    align-items: center;
+    background-image: url("../imgs/mario-background_4x.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container .colisao1 {
+    /* background-color: red;  */
+    position: absolute;
+    height: 175px;
+    width: 82px;
+    z-index: 1;
+    background-image: url("../imgs/koppaa.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 378px;
+}
+
+.container .colisao2 {
+    
+    /* background-color: blue; */
+    position: absolute; 
+    height: 50px;
+    width: 50px;
+    left: 700px;
+    background-size: cover;
+    background-image: url("../imgs/Fireball-Transparent.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: rotateZ(180deg);
+    top: 442px;
+}
+.pontuacao {
+    position: relative;
+    z-index: 2;
+}
+
+
+

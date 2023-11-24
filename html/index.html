@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <span class="pontuacao">PONTOS:</span>
+    <div id="div_pontos" class="pontuacao">0</div>
+
+    <div class="container">
+
+        <div id="redColisao1" class="colisao1">
+
+        </div>
+
+        <div id="blueColisao2" class="colisao2">
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    var pontos = 0;
+    window.addEventListener('keyup', function (e) {
+        var codigoTecla = e.which || e.keyCode || 0;
+        var x = codigoTecla == 88;
+        if (x) {
+            atirarQuadrado()
+
+        }
+    })
+    var subir = true;
+
+    setInterval(function () {
+
+        if (redColisao1.offsetTop >= 378) {
+            subir = true;
+        } else if (redColisao1.offsetTop < 140) {
+            subir = false
+        }
+
+        if (subir) {
+            // console.log(redColisao1.offsetTop)
+            redColisao1.style.top = redColisao1.offsetTop - 10 + 'px';
+        } else {
+            if (redColisao1.offsetTop >= 8 && redColisao1.offsetTop <= 25) {
+                redColisao1.style.top = redColisao1.offsetTop + 2 + 'px';
+            } else {
+                redColisao1.style.top = redColisao1.offsetTop + 10 + 'px';
+            }
+
+        }
+
+
+
+    }, 24);
+
+    window.addEventListener('keyup', function (e) {
+        var codigoTecla = e.which || e.keyCode || 0;
+        var left = codigoTecla == 37;
+        if (left) {
+            atualizarPosicao()
+
+            blueColisao2.style.left = blueColisao2.offsetLeft - 10 + 'px'
+        }
+    })
+
+
+    window.addEventListener('keyup', function (e) {
+        var codigoTecla = e.which || e.keyCode || 0;
+        var right = codigoTecla == 39;
+        if (right) {
+            atualizarPosicao()
+            blueColisao2.style.left = blueColisao2.offsetLeft + 10 + 'px'
+        }
+    })
+
+
+    let cimaVermelhoGlobal;
+    let esquerdaVermelhoGlobal;
+    let direitaVermelhoGlobal;
+    let baixoVermelhoGlobal;
+
+
+    let baixoAzulGlobal;
+    let esquerdaAzulGlobal;
+    let direitaAzulGlobal;
+    let cimaAzulGlobal;
+
+    function atualizarPosicao() {
+        let quadradoVermelho = document.getElementById('redColisao1').getBoundingClientRect();
+        let quadradoAzul = document.getElementById('blueColisao2').getBoundingClientRect();
+
+        cimaVermelhoGlobal = quadradoVermelho.top;
+        esquerdaVermelhoGlobal = quadradoVermelho.left;
+        direitaVermelhoGlobal = quadradoVermelho.right;
+        baixoVermelhoGlobal = quadradoVermelho.bottom;
+
+        baixoAzulGlobal = quadradoAzul.bottom;
+        esquerdaAzulGlobal = quadradoAzul.left;
+        direitaAzulGlobal = quadradoAzul.height;
+        cimaAzulGlobal = quadradoAzul.top;
+        verificarColisao()
+
+    }
+
+    function verificarColisao() {
+        if (cimaVermelhoGlobal < baixoAzulGlobal &&
+            baixoVermelhoGlobal > cimaAzulGlobal &&
+            direitaVermelhoGlobal > esquerdaAzulGlobal &&
+            esquerdaVermelhoGlobal < direitaAzulGlobal) {
+
+            setTimeout(function () {
+                console.log("timeout colisao")
+                blueColisao2.style.left = '700px';
+            }, 500);
+            pontos++
+            div_pontos.innerHTML = pontos
+            matarIntervalo()
+
+        } else {
+            // console.log("NÃO COLIDIU")
+
+        }
+    }
+    var intervalo;
+    function atirarQuadrado() {
+        matarIntervalo()
+        intervalo = setInterval(function () {
+            atualizarPosicao()
+            console.log("interval colisao")
+            blueColisao2.style.left = blueColisao2.offsetLeft - 25 + 'px'
+            if (blueColisao2.offsetLeft <= 0) {
+                matarIntervalo()
+            }
+        }, 10);
+
+    }
+    function matarIntervalo() {
+        clearInterval(intervalo);
+        reiniciar()
+    }
+
+    function reiniciar() {
+        blueColisao2.style.left = '700px'
+    }
+
+</script>
