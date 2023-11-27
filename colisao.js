@@ -3,8 +3,8 @@
 
  // Ouve eventos de tecla para atirar o quadrado vermelho quando a tecla 'X' é pressionada
  window.addEventListener('keyup', function (e) {
-     var codigoTecla = e.which || e.keyCode || 0;
-     var x = codigoTecla == 88;
+     var codigoTecla = e.key
+     var x = codigoTecla == 'x';
      if (x) {
          atirarQuadrado()
 
@@ -41,9 +41,9 @@
  }, 24);
 
  // Ouve eventos de tecla para mover o quadrado azul para a esquerda quando a tecla de seta esquerda é pressionada
- window.addEventListener('keyup', function (e) {
-     var codigoTecla = e.which || e.keyCode || 0;
-     var left = codigoTecla == 37;
+ window.addEventListener('keydown', function (e) {
+     var codigoTecla =  e.key
+     var left = codigoTecla == 'ArrowLeft';
      if (left) {
          atualizarPosicao()
 
@@ -52,9 +52,9 @@
  })
 
  // Ouve eventos de tecla para mover o quadrado azul para a direita quando a tecla de seta direita é pressionada
- window.addEventListener('keyup', function (e) {
-     var codigoTecla = e.which || e.keyCode || 0;
-     var right = codigoTecla == 39;
+ window.addEventListener('keydown', function (e) {
+     var codigoTecla = e.key;
+     var right = codigoTecla == 'ArrowRight';
      if (right) {
          atualizarPosicao()
          blueColisao2.style.left = blueColisao2.offsetLeft + 10 + 'px'
